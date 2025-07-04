@@ -1,2 +1,1 @@
-# ps_frontend
-Front-end gitgub repository of Premier Seven Team
+# PREMIER_SEVEN_FRONT_END
