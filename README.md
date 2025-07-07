@@ -25,7 +25,9 @@
 
 #### 🔹 배포
 
-<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/> 
+
+<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+
 
 #### 🔹 협업 툴
 
@@ -36,7 +38,7 @@
 
 | 이름                                          | 담당 역할 |
 | --------------------------------------------- | --------- |
-| [**이정관**](https://github.com/LEEJUNGKWAN1) | ✅ <br>✅   |
-| [**노인영**](https://github.com/ines2131)     | ✅ <br>✅   |
-| [**이지희**](https://github.com/heeji9290)    | ✅ <br>✅   |
-| [**추민해**](https://github.com/minechoo)     | ✅ <br>✅   |
+| [**이정관**](https://github.com/LEEJUNGKWAN1) | ✅ <br>✅ |
+| [**노인영**](https://github.com/ines2131)     | ✅ <br>✅ |
+| [**이지희**](https://github.com/heeji9290)    | ✅ <br>✅ |
+| [**추민해**](https://github.com/minechoo)     | ✅ <br>✅ |
