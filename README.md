@@ -1,34 +1,69 @@
-# <img src="https://avatars.githubusercontent.com/u/219304290?s=48&v=4"> PREMIRE_SEVEN_TEAM
+# React + TypeScript + Vite
 
-<br>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 1️⃣ 팀 구성 (Team Members)
-### 🔹 [Front-End](https://github.com/PREMIER-SEVEN-TEAM/ps_frontend)
-이정관 ・ 노인영 ・ 이지희 ・ 추민해
-### 🔹 [Back-End](https://github.com/PREMIER-SEVEN-TEAM/ps_backend)
-이동현 ・ 이동익 ・ 정현진
-<br>
+Currently, two official plugins are available:
 
-<br>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 2️⃣ FRONT_END_PART
+## Expanding the ESLint configuration
 
-### 🛠️ 기술 스택 (Tech Stack)
-#### 🔹 Frontend
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"/>
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-#### 🔹 배포
-<img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/> 
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-#### 🔹 협업 툴
-<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white"/>
-<br><br>
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-### 👥 Back-End 역할 분담 (Contributors & Roles)
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-| 이름 | 담당 역할 |
-|------|------------|
-| [**이정관**](https://github.com/LEEJUNGKWAN1) | ✅ <br>✅ |
-| [**노인영**](https://github.com/ines2131) | ✅ <br>✅ |
-| [**이지희**](https://github.com/heeji9290) | ✅ <br>✅ |
-| [**추민해**](https://github.com/minechoo) | ✅ <br>✅ |
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
