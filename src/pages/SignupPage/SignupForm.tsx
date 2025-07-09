@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
 import { Button } from "../../shared/ui/Button";
 import { InputBox } from "../../shared/ui/InputBox";
-import googleIcon from "../../assets/images/GoogleLogo.jpg";
-import kakaoIcon from "../../assets/images/KakaoTalkLogo.jpg";
 import { toast } from "react-toastify";
 
 const SignupForm: React.FC = () => {
@@ -144,21 +142,6 @@ const SignupForm: React.FC = () => {
       <Button type="submit" className="w-full mb-6" color="purple" size="md">
         Sign Up
       </Button>
-
-      {/* Or Sign up with */}
-      <div className="text-center text-gray-400 mb-4">Or Sign up with</div>
-
-      {/* Social Sign up buttons */}
-      <div className="flex justify-center gap-4 mb-6">
-        <button className="flex items-center gap-2 border border-gray-600 px-3 py-1 rounded-md hover:bg-gray-700 transition cursor-pointer">
-          <img src={googleIcon} alt="Google" className="w-5 h-5" />
-          Google
-        </button>
-        <button className="flex items-center gap-2 border border-gray-600 px-3 py-1 rounded-md hover:bg-gray-700 transition cursor-pointer">
-          <img src={kakaoIcon} alt="Kakao" className="w-5 h-5" />
-          Kakao
-        </button>
-      </div>
 
       {/* Switch to login */}
       <p className="text-center text-gray-500 text-sm">
