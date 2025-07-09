@@ -1,19 +1,28 @@
 import React, { useState } from "react";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
 import { Button } from "../../shared/ui/Button";
 import { InputBox } from "../../shared/ui/InputBox";
 import googleIcon from "../../assets/images/GoogleLogo.jpg";
 import kakaoIcon from "../../assets/images/KakaoTalkLogo.jpg";
 import { toast } from "react-toastify";
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreed, setAgreed] = useState(false);
+
+  const isValidEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
   const [errors, setErrors] = useState({
     username: false,
+    email: false,
     password: false,
+    confirmPassword: false,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,17 +30,40 @@ const LoginForm: React.FC = () => {
 
     const newErrors = {
       username: !username,
+      email: !email,
       password: !password,
+      confirmPassword: !confirmPassword,
     };
 
     setErrors(newErrors);
 
     if (Object.values(newErrors).some(Boolean)) {
-      toast.error("아이디와 비밀번호를 입력해주세요.");
+      toast.error("모든 항목을 입력해주세요.");
       return;
     }
-    // API 연결 전에는 그냥 콘솔 출력 정도
-    console.log({ username, password, remember });
+
+    if (!isValidEmail(email)) {
+      setErrors((prev) => ({ ...prev, email: true }));
+      toast.error("올바른 이메일 형식을 입력해주세요.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrors((prev) => ({
+        ...prev,
+        password: true,
+        confirmPassword: true,
+      }));
+      toast.error("패스워드가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!agreed) {
+      toast.error("약관 동의는 필수입니다.");
+      return;
+    }
+    // API 연결 전에는 그냥 콘솔 출력
+    console.log({ username, email, password, agreed });
   };
 
   return (
@@ -41,13 +73,13 @@ const LoginForm: React.FC = () => {
       className="w-full max-w-lg text-white"
     >
       <h2 className="text-3xl font-semibold mb-1 text-center">
-        Kick off your prediction journey!
+        Join the prediction journey!
       </h2>
       <p className="text-md text-gray-400 mb-6 text-center">
-        Welcome back, please enter your detail
+        Sign up and start making your mark
       </p>
 
-      {/* Username Input */}
+      {/* Username */}
       <div className="mb-4">
         <InputBox
           type="text"
@@ -59,7 +91,19 @@ const LoginForm: React.FC = () => {
         />
       </div>
 
-      {/* Password Input */}
+      {/* Email */}
+      <div className="mb-4">
+        <InputBox
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          icon={<FaEnvelope />}
+          hasError={errors.email}
+        />
+      </div>
+
+      {/* Password */}
       <div className="mb-4">
         <InputBox
           type="password"
@@ -71,31 +115,40 @@ const LoginForm: React.FC = () => {
         />
       </div>
 
-      {/* Remember & Forgot password */}
+      {/* Confirm Password */}
+      <div className="mb-4">
+        <InputBox
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          icon={<FaLock />}
+          hasError={errors.confirmPassword}
+        />
+      </div>
+
+      {/* Agree to terms */}
       <div className="flex justify-between text-sm text-gray-400 mb-6">
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
-            checked={remember}
-            onChange={() => setRemember(!remember)}
+            checked={agreed}
+            onChange={() => setAgreed(!agreed)}
             className="accent-[#AB54DB]"
           />
-          Remember Me
+          I agree to the terms and conditions
         </label>
-        <button type="button" className="hover:underline cursor-pointer">
-          Forgot password
-        </button>
       </div>
 
-      {/* Login Button */}
+      {/* Signup Button */}
       <Button type="submit" className="w-full mb-6" color="purple" size="md">
-        Login
+        Sign Up
       </Button>
 
-      {/* Or login with */}
-      <div className="text-center text-gray-400 mb-4">Or login with</div>
+      {/* Or Sign up with */}
+      <div className="text-center text-gray-400 mb-4">Or Sign up with</div>
 
-      {/* Social login buttons */}
+      {/* Social Sign up buttons */}
       <div className="flex justify-center gap-4 mb-6">
         <button className="flex items-center gap-2 border border-gray-600 px-3 py-1 rounded-md hover:bg-gray-700 transition cursor-pointer">
           <img src={googleIcon} alt="Google" className="w-5 h-5" />
@@ -107,15 +160,15 @@ const LoginForm: React.FC = () => {
         </button>
       </div>
 
-      {/* Sign up link */}
+      {/* Switch to login */}
       <p className="text-center text-gray-500 text-sm">
-        Don&apos;t have an account?{" "}
-        <a href="/signup" className="text-[#AB54DB] hover:underline">
-          Sign up
+        Already have an account?{" "}
+        <a href="/signin" className="text-[#AB54DB] hover:underline">
+          Login
         </a>
       </p>
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

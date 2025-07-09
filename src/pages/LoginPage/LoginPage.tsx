@@ -1,6 +1,6 @@
 import React from "react";
 import LoginForm from "./LoginForm";
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../../shared/components/ImageCarousel";
 import logo from "../../assets/images/PREMIER7.png";
 import { useNavigate } from "react-router-dom";
 

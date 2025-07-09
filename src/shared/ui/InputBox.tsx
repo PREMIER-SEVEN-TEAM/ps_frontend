@@ -33,6 +33,7 @@ interface InputBoxProps
   iconPosition?: "left" | "right";
   /** 커스텀 클래스 */
   className?: string;
+  hasError?: boolean;
 }
 
 /** InputBox 컴포넌트 정의 */
@@ -42,6 +43,7 @@ export function InputBox({
   icon,
   iconPosition = "left",
   className,
+  hasError = false,
   ...props
 }: InputBoxProps) {
   /** 아이콘 위치에 따라 인풋 패딩 조절 */
@@ -64,6 +66,9 @@ export function InputBox({
       </span>
     ) : null;
 
+  // 에러일 때 적용할 스타일 (예: 빨간 테두리)
+  const errorStyles = hasError ? "border-red-500" : "";
+
   /** 컴포넌트 반환 */
   return (
     <div className={inputWrapperStyles}>
@@ -79,6 +84,7 @@ export function InputBox({
           paddingClass,
           disabled && disabledStyles,
           !disabled && focusStyles,
+          errorStyles,
           className
         )}
         {...props}
