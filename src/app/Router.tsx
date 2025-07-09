@@ -7,6 +7,8 @@ import StatsPage from "../pages/StatsPage/StatsPage";
 import PlayersTeamsPage from "../pages/PlayersTeamsPage/PlayersTeamsPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import Sidebar from "../shared/layout/Sidebar/Sidebar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -17,6 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex">
       {!hideSidebar && <Sidebar />}
       <main className="flex-1">{children}</main>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 };
