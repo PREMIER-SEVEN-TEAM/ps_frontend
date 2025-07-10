@@ -4,20 +4,42 @@ import { Button } from "../../shared/ui/Button";
 import { InputBox } from "../../shared/ui/InputBox";
 import googleIcon from "../../assets/images/GoogleLogo.jpg";
 import kakaoIcon from "../../assets/images/KakaoTalkLogo.jpg";
+import { toast } from "react-toastify";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
+  const [errors, setErrors] = useState({
+    username: false,
+    password: false,
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors = {
+      username: !username,
+      password: !password,
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(Boolean)) {
+      toast.error("아이디와 비밀번호를 입력해주세요.");
+      return;
+    }
     // API 연결 전에는 그냥 콘솔 출력 정도
     console.log({ username, password, remember });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-lg text-white">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="w-full max-w-lg text-white"
+    >
       <h2 className="text-3xl font-semibold mb-1 text-center">
         Kick off your prediction journey!
       </h2>
@@ -33,6 +55,7 @@ const LoginForm: React.FC = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           icon={<FaUserAlt />}
+          hasError={errors.username}
         />
       </div>
 
@@ -44,6 +67,7 @@ const LoginForm: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           icon={<FaLock />}
+          hasError={errors.password}
         />
       </div>
 
