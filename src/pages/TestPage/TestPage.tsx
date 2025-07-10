@@ -49,8 +49,8 @@ const TestPage: React.FC = () => {
 
       <h3>아이템 리스트</h3>
       <ul>
-        {items.map((item, i) => (
-          <li key={i}>{item.itemName}</li>
+        {items.map((item) => (
+          <li key={item.itemPk}>{item.itemPk}</li>
         ))}
       </ul>
     </div>
