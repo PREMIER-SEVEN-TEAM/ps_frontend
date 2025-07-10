@@ -28,7 +28,7 @@ const TestPage: React.FC = () => {
 
   return (
     <div style={{ padding: "2rem", color: "white" }}>
-      <h2>📦 아이템 테스트</h2>
+      <h2>아이템 테스트</h2>
       <input
         type="text"
         value={itemName}
@@ -40,7 +40,7 @@ const TestPage: React.FC = () => {
 
       <hr style={{ margin: "2rem 0" }} />
 
-      <h3>📋 아이템 리스트</h3>
+      <h3>아이템 리스트</h3>
       <ul>
         {items.map((item, i) => (
           <li key={i}>{item}</li>
