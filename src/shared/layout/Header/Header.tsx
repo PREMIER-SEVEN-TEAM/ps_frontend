@@ -23,6 +23,10 @@ export const Header: React.FC = () => {
       title: "예측 통계",
       subtitle: "전체 예측 정확도를 확인해보세요!",
     },
+    "/test": {
+      title: "테스트",
+      subtitle: "테스트 페이지",
+    },
   };
 
   const { title, subtitle } = pageTitles[location.pathname] || {

@@ -13,6 +13,7 @@ const menuItems = [
   { icon: <LuCalendarDays />, label: "경기일정", path: "/match-schedule" },
   { icon: <LuUsers />, label: "선수/팀 통계", path: "/players-teams-stats" },
   { icon: <LuChartColumn />, label: "예측 통계", path: "/stats" },
+  { icon: <LuChartColumn />, label: "테스트", path: "/test" },
 ];
 
 const Sidebar: React.FC = () => {
