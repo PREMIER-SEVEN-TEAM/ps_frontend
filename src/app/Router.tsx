@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // 조건부 className 처리를 위한 유틸
 import clsx from "clsx";
+import TestPage from "../pages/TestPage/TestPage";
 
 // 전체 페이지 공통 레이아웃 컴포넌트
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -66,6 +67,7 @@ const Router = () => (
         <Route path="/stats" element={<StatsPage />} />
         <Route path="/players-teams-stats" element={<PlayersTeamsPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </Layout>
   </BrowserRouter>
