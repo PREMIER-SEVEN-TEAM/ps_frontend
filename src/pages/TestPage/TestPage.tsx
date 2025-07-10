@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../shared/lib/axiosInstance";
 
+type Item = {
+  itemPk: number;
+  itemName: string;
+};
+
 const TestPage: React.FC = () => {
   const [itemName, setItemName] = useState("");
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
 
   const handleSubmit = async () => {
     try {
@@ -18,13 +23,15 @@ const TestPage: React.FC = () => {
   const fetchItems = async () => {
     try {
       const res = await axiosInstance.get("/item");
-      setItems(res.data);
+      setItems(res.data); // itemPk, itemName을 가진 배열
     } catch (err) {
       console.error("get 에러", err);
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
   return (
     <div style={{ padding: "2rem", color: "white" }}>
@@ -43,7 +50,7 @@ const TestPage: React.FC = () => {
       <h3>아이템 리스트</h3>
       <ul>
         {items.map((item, i) => (
-          <li key={i}>{item}</li>
+          <li key={i}>{item.itemName}</li>
         ))}
       </ul>
     </div>
